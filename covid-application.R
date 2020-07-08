@@ -35,7 +35,8 @@ der3logist <- deriv( ~   exp(beta4+beta1+beta3+b2-exp(beta3+b2)*x1)/
 countries <- c("United Kingdom","Italy","US","Mexico","Peru","Brazil","Chile","Colombia","Belgium")
 
 #reading cumulative death data 
-Y<-read.csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"),sep=',')
+Y<-read.csv(url("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"),
+            sep=',',stringsAsFactors = T)
 Y.1 <- Y %>% filter(Country.Region %in% countries,Province.State=='')
 Y.1$Country.Region
 
