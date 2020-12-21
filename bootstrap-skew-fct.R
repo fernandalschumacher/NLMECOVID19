@@ -38,7 +38,7 @@ bootNLMM <- function(fitObj,#object returned from EM.Skew.NL (if symmetrical=F) 
                                   "emj","traceM","logvero","ljnormal","dmvnorm",
                                   "Dmatrix"))
   ti<-Sys.time()
-  set.seed(99985)
+  set.seed(99987)
   if (distr=='sn') {
     if (symmetrical==F) {
       bootM2res<- revert_list(parSapply(cl,1:Mboot,bootSN,mutC=fitValues,sigmai=sigmafit,
@@ -181,7 +181,7 @@ bootSTui <- function(applyx=NULL,mutC,sigmai,D1i,lambdai,uivec,dat1,dat1pred) {
   }
   dat1$y <- mutC + erroi
   xmat <- matrix(dat1$day)
-  ftest<-seq(1,3,by=.1)
+  ftest<-seq(1,3,by=.2)
   for (fi in ftest) {#
     skewboot=try(EM.Skew.NL(y=dat1$y,x=xmat,ind=dat1$Country.Region,
                             nlfder=der3logist,nlf=logist3,beta1=c(5,-4,-3,log(fi)),
@@ -192,7 +192,7 @@ bootSTui <- function(applyx=NULL,mutC,sigmai,D1i,lambdai,uivec,dat1,dat1pred) {
     if (class(skewboot)[1]!="try-error") if (skewboot$error<10) break
   }
   if (class(skewboot)[1]=="try-error") {
-    for (ai in seq(4,7,by=.1)) {#
+    for (ai in seq(4,6,by=.2)) {#
       skewboot=try(EM.Skew.NL(y=dat1$y,x=xmat,ind=dat1$Country.Region,
                               nlfder=der3logist,nlf=logist3,beta1=c(ai,-4,-3,log(2.5)),
                               sigmae=sigmai^2,
